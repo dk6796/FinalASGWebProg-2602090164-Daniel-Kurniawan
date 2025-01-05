@@ -12,18 +12,16 @@ class FriendController extends Controller
 
     public function register(Request $req){
         $validated = $req->validate([
-            'gender' => 'required',
-            'hobby' => 'required|min:3',
+            'profpict' => 'required',
             'username' => 'required|url|starts_with:http://www.instagram.com/',
-            'mobile' => 'required|numeric',
-            'profpict' => 'required|file|image|max:2048',
+            'gender' => 'required',
+            'hobby' => ['required', 'regex:/^([^,]+,){2,}[^,]+$/'],
+            'mobile' => 'required|integer',
         ], [
-            'gender.required' => 'Gender harus dipilih.',
-            'hobby.min' => 'Hobby minimal 3, dipisahkan dengan koma.',
-            'username.required' => 'Username harus diawali dengan http://www.instagram.com/',
-            'mobile.numeric' => 'Mobile number harus berisi angka saja.',
-            'profpict.required' => 'Foto profil harus diunggah.',
+            'username.starts_with' => 'The username must start with http://www.instagram.com/',
+            'hobby.regex' => 'There must be at least 3 hobbies',
         ]);
+        
 
         return back()->with('success', 'Form Submitted Successfully!');
     }

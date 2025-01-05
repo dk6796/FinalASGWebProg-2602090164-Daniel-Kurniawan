@@ -14,7 +14,7 @@
      @endif
      <div class="d-flex flex-column justify-content-center align-items-center vh-100">
           <h2 class="text-blue fw-bold">Create Account</h2>
-          <form class="d-flex flex-column gap-2" action="{{ route('register.create') }}" method="POST">
+          <form class="d-flex flex-column gap-2 w-25" action="{{ route('register.create') }}" method="POST">
                @csrf
                <div class="d-flex flex-column gap-2">
                     <div class="d-flex gap-2">
@@ -34,7 +34,7 @@
                               <div class="text-danger">*{{ $message }}</div>
                          @enderror
                     </div>
-                    <input type="text" class="form-control" id="username" placeholder="">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="">
                </div>
                <div class="d-flex flex-column gap-2">
                     <div class="d-flex gap-2">
