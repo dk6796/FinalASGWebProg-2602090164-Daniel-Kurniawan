@@ -25,8 +25,6 @@
                     </div>
                     <input class="form-control" type="file" name="profpict" id="profpict">
                </div>
-               
-               
                <div class="d-flex flex-column gap-2">
                     <div class="d-flex gap-2">
                          <label for="username">Username</label>
@@ -35,6 +33,15 @@
                          @enderror
                     </div>
                     <input type="text" class="form-control" id="username" name="username" placeholder="">
+               </div>
+               <div class="d-flex flex-column gap-2">
+                    <div class="d-flex gap-2">
+                         <label for="username">Password</label>
+                         @error('password')
+                              <div class="text-danger">*{{ $message }}</div>
+                         @enderror
+                    </div>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="">
                </div>
                <div class="d-flex flex-column gap-2">
                     <div class="d-flex gap-2">
@@ -75,6 +82,11 @@
                <button type="submit" class="text-white bg-blue p-2 mt-2 rounded-2">Submit</button>
           </form>
      </div>
+     @if($errors->any())
+          @foreach ($errors->all() as $error)
+               <p>{{$error}}</p>
+          @endforeach
+     @endif
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </html>
