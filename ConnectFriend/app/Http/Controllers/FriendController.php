@@ -42,25 +42,24 @@ class FriendController extends Controller
 
         if($req->hasFile('profpict')){
             $file = $req->file('profpict');
-            $imageUrl = $file->store('profile_pictures', 'public');
+            $imageUrl = $file->store('profile_picture', 'public');
         }
 
-        $randomNumber = rand(100000, 125000);
+        $regisPrice = rand(100000, 125000);
 
         DB::table('friends')->insert([
-            'ProfilePicture' => $imageUrl,
+            'ProfilePicture' => 'profile_picture/'.$imageUrl,
             'Username' => $req->username,
             'Password' => bcrypt($req->password),
             'Gender' => $req->gender,
             'Hobbies' => $req->hobby,
             'MobileNumber' => $req->mobile,
-            'RegistrationPrice' => $randomNumber,
+            'RegistrationPrice' => $regisPrice,
             'created_at' => now(),
             'updated_at' => now()
         ]);
     
-        session()->put('randomNumber', $randomNumber);
-        return redirect()->route('payment');
+        return redirect()->route('payment')->with('regisPrice', $regisPrice);
     }
 
     public function login(Request $req){
