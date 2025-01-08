@@ -14,7 +14,7 @@
      @endif
      <div class="d-flex flex-column justify-content-center align-items-center vh-100">
           <h2 class="text-blue fw-bold">Create Account</h2>
-          <form class="d-flex flex-column gap-2 w-25" action="{{ route('register.create') }}" method="POST">
+          <form class="d-flex flex-column gap-2 w-25" action="{{ route('register.create') }}" method="POST" enctype="multipart/form-data">
                @csrf
                <div class="d-flex flex-column gap-2">
                     <div class="d-flex gap-2">
@@ -81,12 +81,11 @@
                </div>
                <button type="submit" class="text-white bg-blue p-2 mt-2 rounded-2">Submit</button>
           </form>
+          <div class="d-flex gap-2 mt-3">
+            <div>Already have an account?</div>
+            <a href={{ route('login.form') }}>Login</a>
+          </div>
      </div>
-     @if($errors->any())
-          @foreach ($errors->all() as $error)
-               <p>{{$error}}</p>
-          @endforeach
-     @endif
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </html>
