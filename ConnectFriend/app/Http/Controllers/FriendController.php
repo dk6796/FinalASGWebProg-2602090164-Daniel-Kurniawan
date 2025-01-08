@@ -59,7 +59,8 @@ class FriendController extends Controller
             'updated_at' => now()
         ]);
     
-        return redirect()->route('payment')->with('regisPrice', $regisPrice);
+        session()->put('regisPrice', $regisPrice);
+        return redirect()->route('payment.form');
     }
 
     public function login(Request $req){
@@ -69,5 +70,15 @@ class FriendController extends Controller
         ]);
 
         return view('pages.home');
+    }
+
+    public function payment(Request $req){
+        $regisPrice = intval($req->input('regisPrice'));
+
+        $validated = $req->validate([
+            'payment' => ['required', 'numeric', 'min:' . $regisPrice],
+        ]);
+
+        return redirect()->route('login.form');
     }
 }
