@@ -28,6 +28,7 @@
                                 <li><a class="dropdown-item" href="#">English</a></li>
                             </ul>
                         </div>
+                        <a class="btn btn-primary" href={{ route('login.form') }} role="button">Login</a>
                     </ul>
                </div>
           </div>

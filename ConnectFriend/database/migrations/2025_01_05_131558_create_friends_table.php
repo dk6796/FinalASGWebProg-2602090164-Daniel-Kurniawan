@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('Hobbies');
             $table->string('MobileNumber');
             $table->string('ProfilePicture');
-            $table->integer('RegistrationPrice');
+            $table->integer('Coins');
             $table->timestamps();
         });
     }

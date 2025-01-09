@@ -17,3 +17,5 @@ Route::post('/register', [FriendController::class, 'register'])->name('register.
 Route::get('/payment', [FriendController::class, 'viewPaymentPage'])->name('payment.form');
 
 Route::post('/payment', [FriendController::class, 'payment'])->name('payment.submit');
+
+Route::put('/paymentConfirmation', [FriendController::class, 'paymentConfirmation'])->name('payment.confirmation');

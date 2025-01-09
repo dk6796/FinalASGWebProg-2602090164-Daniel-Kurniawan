@@ -47,18 +47,19 @@ class FriendController extends Controller
 
         $regisPrice = rand(100000, 125000);
 
-        DB::table('friends')->insert([
+        $userID = DB::table('friends')->insert([
             'ProfilePicture' => 'profile_picture/'.$imageUrl,
             'Username' => $req->username,
             'Password' => bcrypt($req->password),
             'Gender' => $req->gender,
             'Hobbies' => $req->hobby,
             'MobileNumber' => $req->mobile,
-            'RegistrationPrice' => $regisPrice,
+            'Coins' => 0,
             'created_at' => now(),
             'updated_at' => now()
         ]);
-    
+        
+        session()->put('userID', $userID);
         session()->put('regisPrice', $regisPrice);
         return redirect()->route('payment.form');
     }
@@ -74,11 +75,35 @@ class FriendController extends Controller
 
     public function payment(Request $req){
         $regisPrice = intval($req->input('regisPrice'));
+        $payment = intval($req->input('payment'));
 
         $validated = $req->validate([
             'payment' => ['required', 'numeric', 'min:' . $regisPrice],
         ]);
 
+        if($payment > $regisPrice){
+            $excess = $payment - $regisPrice;
+            session()->flash('excess', $excess);
+            return back();
+        }
+
         return redirect()->route('login.form');
+    }
+
+    public function paymentConfirmation(Request $req){
+        if(session()->has('userID') && session()->has('excess')){
+            $userID = session('userID');
+            $excess = session('excess');
+
+            $user = Friends::find($userID);
+            if($user){
+                $user->Coins += $excess;
+                $user->save();
+
+                session()->forget('excess');
+
+                return redirect()->route('login.form');
+            }
+        }
     }
 }
