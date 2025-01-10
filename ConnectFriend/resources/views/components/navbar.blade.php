@@ -30,8 +30,12 @@
                         </div>
                         @auth
                               @if (Auth::user()->ProfilePicture == '')
-                                   <a href="">
+                                   <a href="{{ route('profile') }}">
                                         <img src="./profile_picture/Default.png" alt="" class="rounded" style="width: 40px; height: 40px;">
+                                   </a>
+                              @else
+                                   <a href="{{ route('profile') }}">
+                                        <img src="{{ Auth::user()->ProfilePicture }}" alt="" class="rounded" style="width: 40px; height: 40px;">
                                    </a>
                               @endif
                               <form action="{{ route('logout') }} method="POST">

@@ -15,10 +15,14 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'test',
-            'email' => 'test@example.com',
-            'password' => bcrypt('testing'),
+        // User::factory()->create([
+        //     'name' => 'test',
+        //     'email' => 'test@example.com',
+        //     'password' => bcrypt('testing'),
+        // ]);
+
+        $this->call([
+            AvatarSeeder::class,
         ]);
     }
 }

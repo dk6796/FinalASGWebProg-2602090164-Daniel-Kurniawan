@@ -2,11 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\FriendController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 
-Route::get('/', [FriendController::class, 'viewHomePage'])->name('home');
+Route::get('/', [UserController::class, 'viewHomePage'])->name('home');
 
 Route::get('/login', [LoginController::class, 'viewLoginPage'])->name('login.form');
 
@@ -23,3 +23,11 @@ Route::get('/payment', [RegisterController::class, 'viewPaymentPage'])->name('pa
 Route::post('/payment', [RegisterController::class, 'payment'])->name('payment.submit');
 
 Route::put('/paymentConfirmation', [RegisterController::class, 'paymentConfirmation'])->name('payment.confirmation');
+
+Route::get('/myProfile', [UserController::class, 'viewProfilePage'])->name('profile');
+
+Route::put('/topUp', [UserController::class, 'topUp'])->name('topup');
+
+Route::post('/buyAvatar', [UserController::class, 'buyAvatar'])->name('buyAvatar');
+
+Route::put('/applyAvatar', [UserController::class, 'applyAvatar'])->name('applyAvatar');

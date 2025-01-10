@@ -23,4 +23,8 @@ class Friends extends Authenticatable
         return $this->Password;
     }
 
+    public function purchase(){
+        return $this->hasMany(AvatarPurchase::class, 'id', 'id');
+    }
+
 }
