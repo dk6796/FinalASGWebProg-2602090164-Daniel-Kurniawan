@@ -2,11 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Friends extends Model
+class Friends extends Authenticatable
 {
-    protected $table = "friends";
 
     protected $fillable = [
         'ProfilePicture',
@@ -18,4 +17,10 @@ class Friends extends Model
         'MobileNumber',
         'Coins',
     ];
+
+    public function getAuthPassword()
+    {
+        return $this->Password;
+    }
+
 }

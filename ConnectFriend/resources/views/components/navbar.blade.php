@@ -8,7 +8,7 @@
     <title>ConnectFriend | @yield('title')</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg  bg-light">
+     <nav class="navbar navbar-expand-lg  bg-light">
           <div class="container">
                <a class="navbar-brand" href="#">ConnectFriend</a>
                <div class="collapse navbar-collapse" id="navbarNav">
@@ -28,7 +28,20 @@
                                 <li><a class="dropdown-item" href="#">English</a></li>
                             </ul>
                         </div>
-                        <a class="btn btn-primary" href={{ route('login.form') }} role="button">Login</a>
+                        @auth
+                              @if (Auth::user()->ProfilePicture == '')
+                                   <a href="">
+                                        <img src="./profile_picture/Default.png" alt="" class="rounded" style="width: 40px; height: 40px;">
+                                   </a>
+                              @endif
+                              <form action="{{ route('logout') }} method="POST">
+                                   @csrf
+                                   <button type="submit" class="btn btn-danger">Log Out</button>
+                              </form>
+                        @endauth
+                        @guest
+                              <a class="btn btn-primary" href={{ route('login.form') }} role="button">Login</a>
+                        @endguest
                     </ul>
                </div>
           </div>

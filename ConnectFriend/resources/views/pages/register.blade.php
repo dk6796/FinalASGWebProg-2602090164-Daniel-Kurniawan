@@ -16,7 +16,7 @@
           <h2 class="text-blue fw-bold">Create Account</h2>
           <form class="d-flex flex-column gap-2 w-25" action="{{ route('register.create') }}" method="POST" enctype="multipart/form-data">
                @csrf
-               <div class="d-flex flex-column gap-2">
+               {{-- <div class="d-flex flex-column gap-2">
                     <div class="d-flex gap-2">
                          <label for="profpict">Profile Picture</label>
                          @error('profpict')
@@ -24,7 +24,7 @@
                          @enderror
                     </div>
                     <input class="form-control" type="file" name="profpict" id="profpict">
-               </div>
+               </div> --}}
                <div class="d-flex flex-column gap-2">
                     <div class="d-flex gap-2">
                          <label for="username">Link Instagram Username</label>

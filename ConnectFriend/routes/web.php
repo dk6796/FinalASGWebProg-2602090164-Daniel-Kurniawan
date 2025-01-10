@@ -3,19 +3,23 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\FriendController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 
 Route::get('/', [FriendController::class, 'viewHomePage'])->name('home');
 
-Route::get('/login', [FriendController::class, 'viewLoginPage'])->name('login.form');
+Route::get('/login', [LoginController::class, 'viewLoginPage'])->name('login.form');
 
-Route::post('/login', [FriendController::class, 'login'])->name('login.submit');
+Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
 
-Route::get('/register', [FriendController::class, 'viewRegisterPage'])->name('register.form');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::post('/register', [FriendController::class, 'register'])->name('register.create');
+Route::get('/register', [RegisterController::class, 'viewRegisterPage'])->name('register.form');
 
-Route::get('/payment', [FriendController::class, 'viewPaymentPage'])->name('payment.form');
+Route::post('/register', [RegisterController::class, 'register'])->name('register.create');
 
-Route::post('/payment', [FriendController::class, 'payment'])->name('payment.submit');
+Route::get('/payment', [RegisterController::class, 'viewPaymentPage'])->name('payment.form');
 
-Route::put('/paymentConfirmation', [FriendController::class, 'paymentConfirmation'])->name('payment.confirmation');
+Route::post('/payment', [RegisterController::class, 'payment'])->name('payment.submit');
+
+Route::put('/paymentConfirmation', [RegisterController::class, 'paymentConfirmation'])->name('payment.confirmation');
