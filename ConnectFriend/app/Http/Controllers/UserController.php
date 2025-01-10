@@ -28,7 +28,7 @@ class UserController extends Controller
 
     public function topUp(){
         $user = Auth::user();
-        $user->Coins += 1000;
+        $user->Coins += 100;
         $user->save();
 
         return redirect()->back();

@@ -52,11 +52,11 @@
                     </div>
                     <div class="d-flex gap-3">
                          <div class="d-flex gap-2">
-                              <input type="radio" name="gender" id="male">
+                              <input type="radio" name="gender" id="male" value="Male">
                               <label for="male">Male</label>
                          </div>
                          <div class="d-flex gap-2">
-                              <input type="radio" name="gender" id="female">
+                              <input type="radio" name="gender" id="female" value="Female">
                               <label for="female">Female</label>
                          </div>
                     </div>

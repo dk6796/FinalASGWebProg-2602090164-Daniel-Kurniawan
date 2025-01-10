@@ -30,7 +30,7 @@
             <button type="submit" class="text-white bg-blue p-2 mt-2 rounded-2">Pay</button>
         </form>
         @if ($excess && $excess > 0)
-            <div class="modal fade show" tabindex="-1" id="confirmationModal" style="display: block;" aria-modal="true" role="dialog">
+            <div class="modal fade" tabindex="-1" id="confirmationModal" aria-modal="true" role="dialog">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -52,9 +52,17 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-backdrop fade show"></div>
         @endif
    </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const excess = {{ $excess ?? 'null' }};
+        if (excess && excess > 0) {
+            const modal = new bootstrap.Modal(document.getElementById('confirmationModal'));
+            modal.show();
+        }
+    });
+</script>
 </html>

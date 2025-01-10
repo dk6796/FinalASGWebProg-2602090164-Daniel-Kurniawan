@@ -4,7 +4,7 @@
 
 @section('content')
      <div class="d-flex flex-column gap-3 mt-5">
-          <div class="text-center fs-1">My Profile</div>
+          <div class="text-center fs-1">{{ __('messages.profileTitle') }}</div>
           <div class="d-flex flex-column justify-content-center align-items-center gap-1 mb-5">
                @if (Auth::user()->ProfilePicture == '')         
                     <img src="./profile_picture/Default.png" alt="" class="rounded" style="width:200px; height: 200px;">
