@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Friends;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class FriendController extends Controller
@@ -47,9 +49,13 @@ class FriendController extends Controller
 
         $regisPrice = rand(100000, 125000);
 
-        $userID = DB::table('friends')->insert([
+        $linkInstagram = $req->username;
+        $username = str_replace('http://www.instagram.com/', '', $linkInstagram);
+
+        $userID = Friends::create([
             'ProfilePicture' => 'profile_picture/'.$imageUrl,
-            'Username' => $req->username,
+            'Username' => $username,
+            'LinkInstagram' => $req->username,
             'Password' => bcrypt($req->password),
             'Gender' => $req->gender,
             'Hobbies' => $req->hobby,
@@ -70,7 +76,17 @@ class FriendController extends Controller
             'password' => 'required',
         ]);
 
-        return view('pages.home');
+        $user = Friends::where('Username', $req->username)->first();
+
+        if (!$user || !Hash::check($req->password, $user->password)) {
+            return back()->withErrors([
+                'error' => 'The provided credentials do not match our records.',
+            ]);
+        }
+
+        Auth::login($user);
+
+        return redirect()->route('home');
     }
 
     public function payment(Request $req){
@@ -91,11 +107,12 @@ class FriendController extends Controller
     }
 
     public function paymentConfirmation(Request $req){
-        if(session()->has('userID') && session()->has('excess')){
+        if(session()->has('userID')){
             $userID = session('userID');
-            $excess = session('excess');
+            $excess = $req->input('excess');
 
-            $user = Friends::find($userID);
+            $user = Friends::find($userID)->first();
+
             if($user){
                 $user->Coins += $excess;
                 $user->save();
@@ -105,5 +122,6 @@ class FriendController extends Controller
                 return redirect()->route('login.form');
             }
         }
+        return back();
     }
 }

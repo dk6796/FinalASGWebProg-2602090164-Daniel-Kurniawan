@@ -45,7 +45,7 @@
                             <form action="{{ route('payment.confirmation') }}" method="POST">
                                 @csrf
                                 @method('PUT')
-                                <input type="hidden" name="coins" value="{{ $excess }}">
+                                <input type="hidden" name="excess" value="{{ $excess }}">
                                 <button type="submit" class="btn btn-primary">Yes</button>
                             </form>
                         </div>

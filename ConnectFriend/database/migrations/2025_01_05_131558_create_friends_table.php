@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('friends', function (Blueprint $table) {
             $table->id();
             $table->string('Username');
+            $table->string('LinkInstagram');
             $table->string('Password');
             $table->string('Gender');
             $table->string('Hobbies');

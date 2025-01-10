@@ -34,7 +34,9 @@
                     </div>
                     <input type="password" class="form-control" id="password" name="password" placeholder="">
                </div>
-               
+               @error('error')
+                    <div class="text-danger">*{{ $message }}</div>
+               @enderror
                <button type="submit" class="text-white bg-blue p-2 mt-2 rounded-2">Submit</button>
           </form>
           <div class="d-flex gap-2 mt-3">

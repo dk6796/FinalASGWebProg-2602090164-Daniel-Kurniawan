@@ -27,7 +27,7 @@
                </div>
                <div class="d-flex flex-column gap-2">
                     <div class="d-flex gap-2">
-                         <label for="username">Username</label>
+                         <label for="username">Link Instagram Username</label>
                          @error('username')
                               <div class="text-danger">*{{ $message }}</div>
                          @enderror
